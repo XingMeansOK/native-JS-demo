@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /*
+        测试for in是否会遍历到enumerable为false的属性
+      */
+      function Person() {}
+      var prototypeObjOfPerson = Person.prototype; // 获取Person的原型对象
+      /*
+        实例的内部指针[[prototype]]和类构造函数的prototype属性都指向这个原型对象
+        但是[[prototype]]无法直接访问，主流浏览器可以通过对象实例.__proto__访问他的原型
+      */
+      var personA = new Person();
+      console.log(personA.prototype === prototypeObjOfPerson); // personA.prototype undefined
+      console.log(personA.__proto__ === prototypeObjOfPerson); // true; __proto__前后是两个连续的英文下划线
+      // Object.getPrototypeOf(person)只能接受对象实例作为参数，返回实例的原型
+      console.log(Object.getPrototypeOf(personA) === personA.__proto__ ); // true
+      /*
+        每创建一个函数，就会同时创建他的prototype对象，这个对象最初也只有一个constructor属性，指向这个函数
+      */
+      /*
+        定义enumerable为false的属性
+      */
+      // 定义原型上的属性
+      Object.defineProperties(prototypeObjOfPerson, {
+        proto_false: {
+          value: "enumerable为false" // enumerable默认就是false
+        },
+        proto_true: {
+          value: "enumerable为true",
+          enumerable: true
+        }
+      })
+      // 定义自身的属性
+      Object.defineProperties(personA, {
+        own_false: {
+          value: "enumerable为false"
+        },
+        own_true: {
+          value: "enumerable为true",
+          enumerable: true
+        }
+      })
+      for(var key in personA) { // 只会遍历enumerable为true的属性
+        console.log(key); // 输出proto_true和own_true
+      }
+      console.log(Object.keys(personA)); // own_true;只会输出对象自身的可遍历的属性，不会输出原型上的属性
+      console.log(Object.keys(prototypeObjOfPerson)); //proto_true
+
+    </script>
+  </body>
+</html>
