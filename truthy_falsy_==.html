@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /*
+        强制类型转换：布尔类型
+        falsy是当进行逻辑判断时，为false的值，包括：false、undefined、null、正负0、NaN、""。
+        其他都是truthy，虽然truthy在进行逻辑判断的时候是true，但是不意味着truthy == true！！
+      */
+      var a = "0";
+      var b = [];
+      var c = {};
+
+      var d = "";
+      var e = 0;
+      var f = null;
+      var g;
+
+      // 通常使用"!!"进行强制类型转换，转换成bool
+      !!a;    // true
+      !!b;    // true
+      !!c;    // true
+
+      !!d;    // false
+      !!e;    // false
+      !!f;    // false
+      !!g;    // false
+
+      /*
+        falsy之间的比较
+      */
+      // false、0、空串三者是可以互等的
+      false == 0; // true
+      false == ""; // true
+      0 == ""; // true
+      // null和undefined可以互等，但是不与其他几种相等
+      null == false; // false
+      null == null; // true
+      undefined == undefined; // true
+      undefined == null; // true
+      // NaN，不与其他任何值相等，甚至与自己都不等
+
+      /*
+        isNaN()的结果
+      */
+      // 待补充。。。
+
+      /*
+        双等==类型转换
+        空数组自身做布尔判断时是true，（上面有）
+      */
+      [] == true; // false
+      [] == false; // true ；两边都转成数字再比较
+      [] == ![]; // true,[]是对象，所以是truthy，![]就是false
+      /*
+        "=="隐式的类型转换：
+          一、首先看双等号前后有没有NaN，如果存在NaN，一律返回false。
+
+          二、再看双等号前后有没有布尔，有布尔就将布尔转换为数字。（false是0，true是1）
+
+          三、接着看双等号前后有没有字符串, 有三种情况：
+              1、对方是对象，对象使用toString()或者valueOf()进行转换；
+              2、对方是数字，字符串转数字；（前面已经举例）
+              3、对方是字符串，直接比较；
+              4、其他返回false
+
+          四、如果是数字，对方是对象，对象取valueOf()或者toString()转换为原始值进行比较, 其他一律返回false
+
+          五、null, undefined不会进行类型转换, 但它们俩相等
+
+          总的来说就是尽量转换成数字再比较
+      */
+      /*
+        一般来说，对象到字符串的转换经过了如下步骤：
+        ************对象到字符串************
+        1.如果对象具有toString()方法，则调用这个方法。如果它返回一个原始值，js将这个值转换成字符串，并返还这个字符串结果。
+
+        2.如果对象没有toString()方法，或者这个方法并不返回一个原始值，那么js将调用valueOf()方法。
+
+        3.否则，js无法从toString()或者valueOf()获得一个原始值，因此这时它将抛出一个类型错误异常。
+
+
+        一般来说，对象到数字的转换过程中，js做了同样类似的事情，但这里它会首先尝试使用valueOf()方法：
+        ************对象到数字**************
+        1.如果对象具有valueOf()方法，后者返回一个原始值，则js将这个原始值转换成数字，并返回这个数字。
+
+        2.否则，如果对象具有toString()方法，后者返回一个原始值，则js将转换并返回。
+
+        （首先js转换成相应的字符串原始值，再继续将这个原始值转换成相应的数字类型，再返回数字）
+
+        3.否则，js抛出一个类型错误异常。
+      */
+
+      /*
+        *********验证*********
+      */
+      var aa = [];
+      aa.valueOf = function() {
+        console.log("调用了valueOf");
+        // return this;
+        return ""; // 如果直接就返回了原始值，就不会调用toString了
+      }
+      aa.toString = function() {
+        console.log("调用了toString");
+        return "";
+      }
+      console.log(aa == false); //先后打印了：调用了valueOf 调用了toString true
+      /*
+        所以，[] == false类型转换过程中，真正发生的就是：
+        false先转换成数字0，变成判断 [] == 0;
+        对象和数字比较，对象转换成数字，调用[].valueOf()，返回的是空数组本身，
+        调用[].toString()，得到空字符串，Number("")得到0，
+        最后 0 == 0，true
+      */
+    </script>
+  </body>
+</html>

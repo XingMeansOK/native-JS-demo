@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    /*
+      在看three.js的源码的时候发现了一种写法：
+      原型上定义了一个属性，但是这个属性是一个自执行函数，自执行函数返回了一个函数，不是很理解，所以这个demo就诞生了
+    */
+    function Person() {};
+    // 重写Person的原型，在其原型对象上添加测试方法
+    Person.prototype = {
+      constructor: Person,
+      test: ( function (){
+        var a = 1, b = 2;
+        function e() { console.log(a++); }
+        function f() { console.log(b++); }
+        return function c() {
+          e();
+          f();
+        }
+      }() )
+    }
+    var p1 = new Person();
+    p1.test(); // 1 2
+    p1.test(); // 2 3
+    var p2 = new Person();
+    p2.test(); // 3 4
+    /*
+      貌似也没啥东西，可能带来的好处？：
+      只和test方法相关的变量和方法没有暴露出来？
+      不过每次执行函数的时候，这些变量不用重新进栈，如果有引用类型的变量确实会比较节省
+    */
+    </script>
+  </body>
+</html>

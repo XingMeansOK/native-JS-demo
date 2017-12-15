@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <!-- 经常看到定义对象字面量时，对象的属性用引号括起来，于是这个demo就诞生了 -->
+    <script type="text/javascript">
+      var o = {
+        age: 19, // 逗号分隔多个名值对
+        'last-name':'a', // 不符合命名规则，所以要加引号（符合其命名规则：字母、数字、下划线，且不能以数字开头，不能是保留字。）
+        firstName: 'b', // 如果属性名是一个合法的标识符，而不是保留字，则不强制用引号括住属性名
+        '': ">_<", // 属性名可以是包括空字符集在内的任何字符串
+      }
+
+      console.log( o['age'] + ', ' + o.age ); // 不能o[age]，age又不是变量。。
+      console.log( o['last-name'] );
+      console.log( o[''] ); // >_<
+    </script>
+  </body>
+</html>
