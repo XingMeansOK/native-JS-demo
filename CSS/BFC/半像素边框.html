@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      /* 分割线 */
+      .cutoff {
+      position: relative;
+      }
+      .cutoff::before{
+      content: '';    //追加一个空
+      position: absolute;    //设置定位
+      top: 0;  //如果不设置可能会出现偏移
+      left: 0;
+      border-bottom: 1px solid #fff;    //设置边框
+      width: 200%;    //设置为插入元素的两倍宽高
+      height: 200%;
+      transform-origin: 0 0;    //设置元素的基点为0 0
+      transform: scale(0.5,0.5);    //宽高缩小一半
+      box-sizing: border-box;    //设置盒模型 这一步必须要有,否则边框不会随着一起缩放
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cutoff">
+        <p>
+            狂傲、好战。作为日本武士嚣张的眼神，一个江湖浪客的形象栩栩如生。结合游戏英雄的特点，手持双刀，挑战天下的气势，玩家会在游戏中体验其十足的战斗力
+        </p>
+    </div>
+  </body>
+</html>

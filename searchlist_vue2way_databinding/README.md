@@ -1,3 +1,5 @@
+# DOM0、DOM2和DOM3的事件处理方法
+  **感觉看了几个博客讲的并不是很好，有时间自己整理一份**
 # addEventListener和attachEvent
 
 标准浏览器中可以使用addEventListener()函数来给DOM元素绑定事件，使用removeEventListener()函数移除事件绑定，而IE6 IE7 IE8不支持addEventListener()和removeEventListener()，只能使用attachEvent()和detachEventListener()方法。IE从IE9开始支持addEventListener和removeEventListener.

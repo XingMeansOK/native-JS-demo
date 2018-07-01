@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+    body {padding:0;margin: 0; text-align: center;}
+    .wrapper {margin:30px;width: 450px;border:1px solid red;}
+     .small-box {width: 50px;height: 50px;margin: 10px;background: #9cc;}
+     .middle-box {width: 100px;height: 100px;margin: 20px;background: #99c;}
+     .big-box {width: 120px;height: 120px;margin: 20px;background: #33e;}
+     .floatL {float: left;}
+     .floatR {float: right;}
+     .clear {clear: both;}
+     .posA {position: absolute;}
+     .overHid{overflow: hidden;}
+     .red {background: #f00;}
+    .green {background: #0f0;}
+    .blue {background: #00f;}
+  </style>
+  <body>
+    <div class="wrapper overHid">
+        <div class="big-box" style="box-shadow:0 20px 0 rgba(0,0,255,0.2);">non-float</div>
+        <div class="middle-box green floatL" style="opacity:0.6">float left</div>
+        <div class="middle-box red clear" style="margin-top:40px;box-shadow:0 -40px 0 rgba(255,0,0,0.2);">clear</div>
+    </div>
+
+    <!-- 上面的图中我们可以看到，我们为红色块盒设置的40px的margin-top（这里我们通过相同高度的阴影来将其可视化）好像并没有对紫色块盒起作用，而且无论我们怎么修改这个margin-top值都不会影响红色块盒的位置，而只由绿色块盒的margin-bottom所决定。
+
+    也就是说，我们只需要知道，闭合浮动的元素的border-top会紧贴着相应的浮动元素的margin-bottom。
+
+    原来，通过w3c的官方规范可知，闭合浮动的块盒在margin-top上所产生的间距（clearance）的值与该块盒的margin-top之和应该足够让该块盒垂直的跨越浮动元素的margin-bottom，使闭合浮动的块盒的border-top恰好与浮动元素的块盒的margin-bottom相邻接。
+
+    用上图例子中的相关值可以得出这样一个式子：r-margin-top + r-clearance = g-margin-top + g-height + g-margin-bottom -->
+
+  </body>
+</html>

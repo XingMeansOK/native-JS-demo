@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      /*
+      .stage相当于canvas画布，也就是投影面
+      始终位于电脑屏幕所在的平面
+
+      css3三维场景与webgl视锥的不同，（都是透视投影）：
+      1.css3不存在平截头体，也就是.stage内的子元素都会显示出来（overflow允许）；
+      2.css3 perspective-origin改变的是视点的位置，因为不存在视锥，随意就没有摄像机姿态的问题；
+      3.坐标系不同
+
+       */
+      .stage {
+        margin: 0 auto;
+        perspective: 800px; /* 摄像机到屏幕的距离 */
+        perspective-origin: 50% 50%; /*
+        设置视点的位置
+        */
+        width: 400px;
+        height: 400px;
+        transform-style: preserve-3d;
+        border: 1px solid #000;
+      }
+      .pic {
+        width: 400px;
+        height: 400px;
+        background-color: #f90;
+        transform: rotateX( 90deg ); /* 可以有多个变换，执行顺序是从左到右 */
+        transform-origin: 50% 50%; /*设置变换的基准点，默认就是中心*/
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <div class="pic"></div>
+    </div>
+  </body>
+</html>

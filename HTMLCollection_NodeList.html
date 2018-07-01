@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="parent">
+      <span>子元素</span>
+      <span>子元素</span>
+
+
+      <span>子元素</span>
+      <span>子元素</span>
+      <span>子元素</span>
+      <span>子元素</span>
+    </div>
+
+    <script type="text/javascript">
+      debugger
+      var p = document.getElementById( 'parent' );
+      var nodes = p.childNodes;
+      var children = p.children;
+      /*
+      childNodes返回的子节点集合（NodeList）中，包含文本节点：
+      紧跟着div标签的是个换行符，所以childNodes的第一个元素是Text Node
+      每个span后面都是换行符；第二个span后面有多个换行符和空格，会组成一个text Node
+      更多的参考w3c html的规范
+       */
+      console.log( nodes );
+      /*
+      children属性返回的是HTMLCollection，只包含元素节点
+       */
+      console.log( children );
+      /*
+      HTMLCollection和NodeList的区别：
+
+      HTMLCollection是以节点为元素的列表，可以凭借索引、节点名称、节点属性来对独立的节点进行访问。
+      HTML DOM中的Collections是实时变动的，当原始文件变化，Collections也会随之发生变化。
+      方法1：item（通过序号索引来获取节点，参数是索引值，超过索引值返回null）
+      方法2：namedItem（用名字来返回一个节点，首先搜寻是否有匹配的id属性，如果没有就寻找是否有匹配的name属性，如果都没有，返回null）
+
+
+      NodeList返回节点的有序集合，DOM中的NodeList也是实时变动的
+      item（返回集合中的元素，如果超过范围返回null）
+       */
+    </script>
+
+  </body>
+</html>

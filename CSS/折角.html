@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .t {
+        width: 400px;
+        height: 400px;
+        background: linear-gradient( -150deg, transparent 40px, #58a 0 );
+        border-radius: 1em;
+        position: relative;
+      }
+      .t::before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 46px;
+        height: 46px;
+        transform-origin: right top;
+        transform: translateY(46px) rotate(60deg) scaleX(1.732);
+        background: linear-gradient( to right bottom, transparent 50%, #ccc 0 );
+        border-bottom-right-radius: Inherit;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="t">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+      var test = (function(a) {
+        // this指向的是window，a是添加到了window上。
+        this.a = a;
+        debugger
+        return function(b) {
+          debugger
+          return this.a + b;
+        }
+      } (function(a, b) { return a; }(1, 2)));
+
+      console.log(test(4));  // test的调用者也是window，所以this.a是可以读到的
+    </script>
+
+  </body>
+</html>

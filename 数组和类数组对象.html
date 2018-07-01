@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var a = [ 1, 2, 3 ];
+      /*
+      为什么可以在第二个判断条件上可以用赋值？
+      赋值语句会返回等号后面的值
+      所以当i越界的时候，赋值语句就返回undefined
+
+      这么用会比较高效，但是要确保数组中没有false，null，undefined这些
+       */
+      for( var i=0, b; b = a[i]; i++ ) {
+        // debugger
+      }
+      var c = a.reduce( function( f, s ) {
+        return f + s;
+      }, 0 )
+
+      Array.apply(null, { length: 20 }).map(function ( v, index ) {
+        // console.log( v + ', ' + index )
+      });
+      /*
+      Array.apply(null, { length: 20 }) 的作用就是，构造一个长度为二十，并且每个元素都被初始化为undefined的数组
+      1.apply的第一个参数如果为null，在非严格模式下，相当于传入的是全局对象
+      2.es5允许第二个参数传入一个类数组对象
+
+      因为map、forEach这些方法，如果数组元素没有初始化，在循环过程中就不会迭代这个元素
+       */
+       var d = new Array( 3 );
+       d.hasOwnProperty('0'); // false
+       Array.apply(null, { length: 20 }).hasOwnProperty('0'); // true
+       debugger
+
+
+      // JavaScript权威指南中对类数组对象的判定方法
+      function isArrayLike(o) {
+          if( o // o不是null、undefined等
+             && typeof o === 'object' // o的数据类型为'object'
+             && isFinite(o.length) // o.length是有限数值
+             && o.length >= 0 // o.length为非负值
+             && o.length === Math.floor(o.length) // o.length是整数
+             && o.length < 4294967296 // o.length < 2^32
+          ) return true
+          else
+             return false
+      }
+
+
+    </script>
+  </body>
+</html>

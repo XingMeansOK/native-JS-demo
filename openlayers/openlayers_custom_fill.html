@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom Polygon Styles</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.4/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.6.4/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+    var featurePoly = new ol.Feature(new ol.geom.Polygon([[
+      [-12550727, 2281352], [-11168471, 3244427],
+      [-10867077, 1986886], [-12550727, 2281352]
+    ]]));
+
+    var featurePoly2 = new ol.Feature(new ol.geom.Polygon([[
+      [-13550727, 2281352], [-12168471, 3244427],
+      [-11867077, 1986886], [-13550727, 2281352]
+    ]]));
+
+    var cnv = document.createElement('canvas');
+    var ctx = cnv.getContext('2d');
+    var img = new Image();
+    img.src = 'https://i.imgsafe.org/73d1273.png';
+
+    img.onload = function(){
+      var pattern = ctx.createPattern(img, 'repeat');
+
+      vectorLayer.setStyle(new ol.style.Style({
+        fill: new ol.style.Fill({
+          color: pattern
+        })
+      }));
+      // featurePoly.setStyle(new ol.style.Style({
+      //   fill: new ol.style.Fill({
+      //     color: pattern
+      //   })
+      // }));
+    };
+
+
+    var vectorSource = new ol.source.Vector({
+      features: [featurePoly, featurePoly2]
+    });
+    var vectorLayer = new ol.layer.Vector({
+      source: vectorSource
+    });
+
+    var map = new ol.Map({
+      target: 'map',
+      layers: [
+        // new ol.layer.Tile({ source: new ol.source.OSM() }),
+        vectorLayer
+      ],
+      view: new ol.View({
+        center : [-11407508, 2520388],
+        zoom : 3
+      })
+    });
+    </script>
+  </body>
+</html>

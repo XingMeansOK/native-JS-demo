@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+    body {padding:0;margin: 0; text-align: center;}
+    .wrapper {margin:30px;width: 450px;border:1px solid red;}
+     .small-box {width: 50px;height: 50px;margin: 10px;background: #9cc;}
+     .middle-box {width: 100px;height: 100px;margin: 20px;background: #99c;}
+     .big-box {width: 120px;height: 120px;margin: 20px;background: #33e;}
+     .floatL {float: left;}
+     .floatR {float: right;}
+     .clear {clear: both;}
+     .posA {position: absolute;}
+     .overHid{overflow: hidden;}
+     .red {background: #f00;}
+    .green {background: #0f0;}
+    .blue {background: #00f;}
+  </style>
+  <body>
+    <!--
+    浮动和绝对定位的元素a会为其内容创建了新的bfc（B），并且不会与其子元素b产生margin堆叠，
+    因为a和b不在同一个bfc中，b在B中，但是a呢？。
+    Boxes in the normal flow belong to a formatting context, which may be block or inline
+    所以：文档流 包含多个BFC或IFC，那a还在他原来的bfc里么？
+   -->
+
+    <div class="wrapper overHid">
+      <!-- 因为overflow hidden，所以以下内容处于一个新的bfc中 -->
+        <div class="big-box">non-float，和父div并不处于同一个bfc中，所以margin-top不会堆叠</div>
+        <div class="middle-box green floatL">浮动，由脱离了当前的bfc，所以margin不会和bigbox堆叠</div>
+        <div class="middle-box red">与bigbox发生堆叠</div>
+    </div>
+
+  </body>
+</html>

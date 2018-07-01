@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="page">
+        <div class="content main">
+            <div class="refer">
+                <ul>
+                    <li></li>
+                    <li></li>
+
+                </ul>
+             </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var genCssSelector = function( t ){
+      // your code here
+      //
+      var pSelector = ' ';
+      if( t.parentNode && t.nodeName != 'HTML' ) {
+        pSelector = genCssSelector( t.parentNode )
+      }
+
+      var idStr = '';
+      var classStr = '';
+      var tStr = '';
+      if( t.id ) {
+         return idStr = pSelector + '#' + t.id + ' ';
+      }
+      if( t.classList && t.classList.length){
+        for( var i = 0 ; i<t.classList.length; i++ ) {
+          classStr = '.' + t.classList.item(i);
+        }
+        return pSelector + classStr + ' ';
+      }
+      else {
+        return pSelector + t.tagName + ' ';
+      }
+
+
+
+    }
+
+    document.addEventListener('click', function(e){
+        //点击li时，返回：html body #page .content.main .refer ul li
+        console.log(genCssSelector(e.target));
+    })
+    </script>
+  </body>
+</html>

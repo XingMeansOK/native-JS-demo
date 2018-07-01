@@ -64,7 +64,7 @@ function onInput(e) {
 function fn(data) {
     var ulList = document.getElementsByTagName('ul')[0];
     var newUlist = document.createElement('ul');
-    newUlist.dataset.query = data.q;
+    newUlist.dataset.query = data.q; // dataset是H5的新特性，是DOMStringMap类型
     newUlist.dataset.listIndex = -1;
     data.s.forEach(function (item) {
         var li = document.createElement('li');

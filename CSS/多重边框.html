@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      div {
+        margin: 50px;
+        width: 200px;
+        height: 200px;
+        background-color: #f90;
+      }
+      .shadowbox {
+
+        box-shadow:
+         5px /* x轴偏移量 */
+         10px /* y轴偏移量 */
+         10px  /* 模糊距离 ，在阴影尺寸之外*/
+         20px /* 阴影尺寸 */
+         #ccc /* 阴影颜色 */
+         /* inset;  */
+         /* 变成内部阴影 */
+         ,
+         5px /* x轴偏移量 */
+         10px /* y轴偏移量 */
+         10px  /* 模糊距离 ，在阴影尺寸之外*/
+         40px /* 阴影尺寸 */
+         #990 /* 阴影颜色 */
+         /* 支持多重阴影 */
+
+      }
+
+      .outlinebox {
+        outline: 5px dashed #fff;
+        outline-offset: -10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shadowbox">
+    </div>
+
+    <div class="outlinebox">
+    </div>
+    <div class="outlinebox" style="position: relative;top: 70px; left: 70px">
+    </div>
+    <div class="outlinebox">
+    </div>
+  </body>
+</html>

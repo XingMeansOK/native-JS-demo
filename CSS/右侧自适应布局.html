@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    /* 两列右侧自适应布局 */
+    .user{
+      >div:first-child {
+        width: 3rem;
+        height: 3rem;
+        background: #f90;
+        float:left;
+      }
+      >div:last-child{
+        overflow:hidden;
+        background: #00ffff;
+      }
+    }
+    .use-float::after {
+      content:".";
+      display:block;
+      height:0;
+      visibility:hidden;
+      clear:both;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="user">
+        <div>
+        </div>
+        <div>
+            <div>22</div>
+            <div>222</div>
+            <div>222</div>
+        </div>
+    </div>
+  </body>
+</html>
